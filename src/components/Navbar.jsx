@@ -1,22 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import toast from "react-hot-toast";
-import logo from "../assets/logo.svg"; // ✅ direct import instead of assets.logo
+import logo from "../assets/logo.svg"; // static logo
 
 const Navbar = () => {
-  const [user, setUser] = useState(null); // initially no user
-  const [isOwner, setIsOwner] = useState(false); // not used now
-  const [showLogin, setShowLogin] = useState(false); // for Login toggle
+  const dispatch = useDispatch();
+
+  // ✅ Get user from Redux state
+  const user = useSelector((state) => state.user); // { name, image }
 
   const logout = () => {
-    setUser(null);
+    // You can add a logout reducer if needed, for now just show toast
     toast.success("Logged out successfully!");
-  };
-
-  const changeRole = async () => {
-    // this function is optional now, can be removed if unused
-    setIsOwner(true);
-    toast.success("Role changed to owner!");
   };
 
   return (
@@ -25,15 +21,16 @@ const Navbar = () => {
         <img src={logo} alt="Logo" className="h-7" />
       </Link>
 
-      <p>Welcome, {user?.name || "Admin"}</p>
+      <p className="text-sm">
+        Welcome,{" "}
+        <span className="font-medium text-black">{user?.name || "Admin"}</span>
+      </p>
 
       <button
-        onClick={() => {
-          user ? logout() : setShowLogin(true);
-        }}
+        onClick={logout}
         className="text-sm px-4 py-2 rounded bg-primary text-white hover:bg-blue-800 transition"
       >
-        {user ? "Logout" : "Login"}
+        Logout
       </button>
     </div>
   );
