@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { dummyUserData } from "../assets/assets";
 import { NavLink, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
@@ -9,7 +8,14 @@ import {
   UserPlus,
   Users,
   Wallet,
+  Settings,
 } from "lucide-react";
+
+// Dummy user data — use your own data or replace this
+const dummyUserData = {
+  name: "GreatStack",
+  image: "", // fallback if needed
+};
 
 const ownerMenuLinks = [
   {
@@ -31,6 +37,11 @@ const ownerMenuLinks = [
     name: "Pay Out",
     path: "/admin/pay-out",
     icon: <Wallet size={18} />,
+  },
+  {
+    name: "Setting",
+    path: "/admin/profile-edit",
+    icon: <Settings size={18} />,
   },
 ];
 

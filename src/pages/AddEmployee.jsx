@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Title from "../components/Title";
 import { toast } from "react-toastify";
 import axios from "axios";
-import { Upload } from "lucide-react"; // Lucide icon
+import { Upload } from "lucide-react";
 
 const AddEmployee = () => {
   const [image, setImage] = useState(null);
@@ -76,7 +76,7 @@ const AddEmployee = () => {
         </div>
 
         {/* Input Fields */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 h-40">
           <div className="flex flex-col">
             <label>Full Name</label>
             <input

@@ -41,6 +41,9 @@ import car_image2 from "./car_image2.png";
 import car_image3 from "./car_image3.png";
 import car_image4 from "./car_image4.png";
 
+// ✅ SINGLE import for Lucide icons
+import { Gauge, UserPlus, Users, Wallet, Settings } from "lucide-react";
+
 export const cityList = ["New York", "Los Angeles", "Houston", "Chicago"];
 
 export const assets = {
@@ -97,27 +100,28 @@ export const menuLinks = [
 export const ownerMenuLinks = [
   {
     name: "Dashboard",
-    path: "/admin", // ✅ matches the index route inside /admin
-    icon: dashboardIcon,
-    coloredIcon: dashboardIconColored,
+    path: "/admin",
+    icon: <Gauge size={18} />,
   },
   {
     name: "Add Employees",
     path: "/admin/add-employees",
-    icon: addIcon,
-    coloredIcon: addIconColored,
+    icon: <UserPlus size={18} />,
   },
   {
     name: "Manage Employees",
     path: "/admin/manage-employees",
-    icon: carIcon,
-    coloredIcon: carIconColored,
+    icon: <Users size={18} />,
   },
   {
     name: "Pay Out",
     path: "/admin/pay-out",
-    icon: listIcon,
-    coloredIcon: listIconColored,
+    icon: <Wallet size={18} />,
+  },
+  {
+    name: "Setting",
+    path: "/admin/profile-edit",
+    icon: <Settings size={18} />,
   },
 ];
 

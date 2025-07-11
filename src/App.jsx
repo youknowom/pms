@@ -6,6 +6,7 @@ import Dashboard from "./pages/Dashboard";
 import AddEmployee from "./pages/AddEmployee";
 import ManageEmployee from "./pages/ManageEmployee";
 import PayOut from "./pages/PayOut";
+import Profileedit from "./pages/Admin/Profileedit";
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
           <Route path="add-employees" element={<AddEmployee />} />
           <Route path="manage-employees" element={<ManageEmployee />} />
           <Route path="pay-out" element={<PayOut />} />
+          <Route path="profile-edit" element={<Profileedit />} />
         </Route>
         <Route path="*" element={<h1>404 - Not Found</h1>} />
       </Routes>

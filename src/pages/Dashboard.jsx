@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Title from "../components/Title";
 import { Users, UserCheck, UserX, CalendarClock } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
   const [data, setData] = useState({
@@ -10,9 +11,13 @@ const Dashboard = () => {
     totalLeavesPending: 0,
     recentAttendance: [],
   });
-
+  const navigate = useNavigate();
+  const emphandleclick = () => {
+    navigate("/admin/manage-employees");
+  };
   const dashboardCards = [
     {
+      onclick: emphandleclick,
       title: "Total Employees",
       value: data.totalEmployees,
       icon: <Users className="text-blue-600 w-5 h-5" />,
@@ -49,7 +54,7 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <div className="px-4 pt-10 md:px-10 flex-1">
+    <div className="px-6 pt-10 md:px-15 flex-2 ">
       {/* Title */}
       <Title
         title="Admin Dashboard"
@@ -57,17 +62,18 @@ const Dashboard = () => {
       />
 
       {/* Dashboard Cards */}
-      <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 my-8 max-w-5xl">
+      <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 my-8 max-w-5xl ">
         {dashboardCards.map((card, index) => (
           <div
+            onClick={card.onclick}
             key={index}
-            className="flex gap-2 items-center justify-between p-4 rounded-md border border-borderColor bg-white shadow-sm"
+            className="flex gap-2 items-center justify-between p-4 rounded-md border border-borderColor bg-white shadow-sm h-40 cursor-pointer"
           >
-            <div>
-              <h1 className="text-xs text-gray-500">{card.title}</h1>
-              <p className="text-lg font-semibold">{card.value}</p>
+            <div className="text-5xl flex flex-col">
+              <h1 className="m-0 text-base text-gray-500">{card.title}</h1>
+              <p className="text-2xl font-semibold">{card.value}</p>
             </div>
-            <div className="flex items-center justify-center w-10 h-10 rounded-full bg-primary/10">
+            <div className="flex items-center justify-center w-12 h-12 rounded-full bg-primary/10">
               {card.icon}
             </div>
           </div>
