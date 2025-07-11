@@ -1,5 +1,6 @@
 import React from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
 // Pages
 import Layout from "./pages/Layout";
 import Dashboard from "./pages/Dashboard";
@@ -11,6 +12,7 @@ import Profileedit from "./pages/Admin/Profileedit";
 const App = () => {
   return (
     <>
+      <Toaster position="top-center" reverseOrder={false} />
       <Routes>
         <Route path="/" element={<Navigate to="/admin" />} />
         <Route path="/admin" element={<Layout />}>
