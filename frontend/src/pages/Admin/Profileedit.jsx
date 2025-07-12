@@ -20,10 +20,10 @@ const Profileedit = () => {
     const objectUrl = URL.createObjectURL(image);
     setPreview(objectUrl);
 
-    return () => URL.revokeObjectURL(objectUrl); // Cleanup
+    return () => URL.revokeObjectURL(objectUrl);
   }, [image]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!name && !image) {
@@ -31,18 +31,32 @@ const Profileedit = () => {
       return;
     }
 
-    const imageURL = preview || null;
+    const formData = new FormData();
+    if (name) formData.append("name", name);
+    if (image) formData.append("image", image);
 
-    dispatch(
-      updateUser({
-        name: name || undefined,
-        image: imageURL || undefined,
-      })
-    );
+    try {
+      const res = await fetch("http://localhost:5000/api/admin/update", {
+        method: "POST",
+        body: formData,
+      });
 
-    toast.success("Profile updated!");
-    setName("");
-    setImage(null);
+      const data = await res.json();
+
+      if (res.ok) {
+        dispatch(
+          updateUser({ name: data.admin.name, image: data.admin.image })
+        );
+        toast.success("Profile updated!");
+        setName("");
+        setImage(null);
+      } else {
+        toast.error(data.error || "Update failed");
+      }
+    } catch (err) {
+      toast.error("Something went wrong");
+      console.error("Update error:", err);
+    }
   };
 
   return (
@@ -86,7 +100,7 @@ const Profileedit = () => {
 
         <button
           type="submit"
-          className="bg-primary text-white px-4 py-2 rounded hover:bg-blue-700"
+          className="bg-primary text-white px-4 py-2 rounded hover:bg-blue-700 transition"
         >
           Update Profile
         </button>
